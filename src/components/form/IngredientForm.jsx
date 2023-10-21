@@ -8,8 +8,10 @@ export const IngredientForm = () => {
 	const [activeKey, setActiveKey] = useState('0');
 
 	const addIngredient = (newIngredient) => {
-		setIngredientList([...ingredientList, newIngredient]);
-		setIngredient('');
+		if (newIngredient) {
+			setIngredientList([...ingredientList, newIngredient]);
+			setIngredient('');
+		}
 	};
 
 	const handleAccordion = () => {
