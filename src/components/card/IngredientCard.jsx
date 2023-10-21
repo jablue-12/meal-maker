@@ -2,8 +2,9 @@ import React from 'react';
 import { Container, Card, Col, Row, CloseButton } from 'react-bootstrap';
 
 export const IngredientCard = (props) => {
+	const { onButtonClick, ingredientName } = props;
 	const deleteIngredient = () => {
-		props.onButtonClick(`${props.ingredientName}`);
+		onButtonClick(`${ingredientName}`);
 	};
 
 	return (
@@ -11,7 +12,7 @@ export const IngredientCard = (props) => {
 			<Container>
 				<Row className="p-1">
 					<Col>
-						{props.ingredientName}
+						{ingredientName}
 					</Col>
 					<Col className="flex-grow-0">
 						<CloseButton onClick={deleteIngredient}/>

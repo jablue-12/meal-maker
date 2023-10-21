@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import { Meal } from './components/card/MealCard';
+import { MealCard } from './components/card/MealCard';
 import { IngredientForm } from './components/form/IngredientForm';
 import { Header } from './components/navbar/Header';
 import './App.css';
@@ -15,13 +15,13 @@ function App () {
 				</Row>
 				<Row xs={1} sm={2} md={2} lg={3}>
 					<Col>
-						<Meal/>
+						<MealCard/>
 					</Col>
 					<Col>
-						<Meal/>
+						<MealCard/>
 					</Col>
 					<Col>
-						<Meal/>
+						<MealCard/>
 					</Col>
 				</Row>
 			</Container>
