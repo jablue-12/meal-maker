@@ -1,29 +1,24 @@
-import React from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
-import { MealCard } from './components/card/MealCard';
+import React, { useState } from 'react';
+import { Container, Row } from 'react-bootstrap';
 import { IngredientForm } from './components/form/IngredientForm';
 import { Header } from './components/navbar/Header';
+import { GeneratedMeals } from './components/views/GeneratedMeals';
 import './App.css';
 
 function App () {
+	const [mealsByIngredients, setMealsByIngredients] = useState([]);
+	const generateMeals = (ingredients) => {
+		setMealsByIngredients(ingredients);
+	};
+
 	return (
 		<>
 			<Header/>
 			<Container>
 				<Row>
-					<IngredientForm/>
+					<IngredientForm onGenerateMealsClick={generateMeals}/>
 				</Row>
-				<Row xs={1} sm={2} md={2} lg={3}>
-					<Col>
-						<MealCard/>
-					</Col>
-					<Col>
-						<MealCard/>
-					</Col>
-					<Col>
-						<MealCard/>
-					</Col>
-				</Row>
+				<GeneratedMeals meals={mealsByIngredients}/>
 			</Container>
 		</>
 	);
