@@ -7,8 +7,11 @@ import './App.css';
 
 function App () {
 	const [mealsByIngredients, setMealsByIngredients] = useState([]);
+	const [hasGenerateMeals, setHasGenerateMeals] = useState(false);
+
 	const generateMeals = (ingredients) => {
 		setMealsByIngredients(ingredients);
+		setHasGenerateMeals(true);
 	};
 
 	return (
@@ -18,7 +21,7 @@ function App () {
 				<Row>
 					<IngredientForm onGenerateMealsClick={generateMeals}/>
 				</Row>
-				<GeneratedMeals meals={mealsByIngredients}/>
+				{ hasGenerateMeals && <GeneratedMeals meals={mealsByIngredients}/>}
 			</Container>
 		</>
 	);
