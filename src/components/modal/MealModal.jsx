@@ -6,9 +6,9 @@ export const MealModal = (props) => {
 	return (
 		<Modal show={show} onHide={handleClose}>
 			<Modal.Header closeButton>
-				<Modal.Title>{recipe.name}</Modal.Title>
+				<Modal.Title>{recipe.strMeal}</Modal.Title>
 			</Modal.Header>
-			<Modal.Body>{recipe.details}</Modal.Body>
+			<Modal.Body>{recipe.strInstructions}</Modal.Body>
 			<Modal.Footer>
 				<Button variant="secondary" onClick={handleClose}>
 					Close

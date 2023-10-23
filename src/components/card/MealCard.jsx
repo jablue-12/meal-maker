@@ -1,43 +1,60 @@
 import React, { useEffect, useState } from 'react';
 import { Card } from 'react-bootstrap';
+import { get } from '../../api/api';
 import { MealModal } from '../modal/MealModal';
 
-export const MealCard = () => {
+const endpoint = 'lookup.php?i=';
+
+export const MealCard = (props) => {
+	const { meal } = props;
 	const [show, setShow] = useState(false);
-	const [meal, setMeal] = useState({ name: '', details: '' });
+
+	const [response, setResponse] = useState({
+		data: null,
+		loading: true,
+		error: null
+	});
 
 	const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
 
 	useEffect(() => {
-		const sampleMeal = {
-			name: 'Meal 1',
-			details: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Omnis officiis aspernatur atque consequuntur consequatur illum eaque modi. Quos, accusantium aspernatur.'
-		};
-
-		setMeal(sampleMeal);
+		if (meal) {
+			get((`${endpoint}${meal.idMeal}`))
+				.then((apiResponse) => {
+					setResponse(apiResponse);
+				});
+		}
 	}, []);
 
 	return (
 		<>
-			<Card
-				className="border-dark mb-3"
-				style={{ cursor: 'pointer' }}
-				onClick={() => handleShow()}>
-				<Card.Body>
-					<Card.Img
-						src="https://via.placeholder.com/150"
-						alt="placeholder"
-						className="mb-2"/>
-					<Card.Title className="fw-bold ">
-						{meal.name}
-					</Card.Title>
-					<Card.Text className="fst-italic">
-						{meal.details}
-					</Card.Text>
-				</Card.Body>
-			</Card>
-			<MealModal show={show} handleClose={handleClose} recipe={ meal}/>
+			{response.loading ? <p>Loading...</p> : null}
+			{response.error ? <p>Error: {response.error.message}</p> : null}
+			{response.data
+				? (
+					<>
+						<Card
+							className="border-dark mb-3 text-center"
+							style={{ cursor: 'pointer' }}
+							onClick={() => handleShow()}>
+							<Card.Body>
+								<Card.Img
+									src={meal.strMealThumb ? meal.strMealThumb : 'https://via.placeholder.com/150' }
+									alt="placeholder"
+									className="mb-2 object-fit-fill"/>
+								<Card.Title className="fw-bolder">
+									{meal.strMeal}
+								</Card.Title>
+								<Card.Text className="fst-italic text-truncate">
+									Explore Details
+								</Card.Text>
+							</Card.Body>
+						</Card>
+						<MealModal show={show} handleClose={handleClose} recipe={response.data.meals[0]}/>
+					</>
+				)
+				: null}
 		</>
 	);
 };
