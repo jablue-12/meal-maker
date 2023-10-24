@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Card } from 'react-bootstrap';
 import { get } from '../../api/api';
 import { MealModal } from '../modal/MealModal';
+import { PlaceholderCard } from './PlaceholderCard';
 
 const endpoint = 'lookup.php?i=';
 
@@ -29,9 +30,10 @@ export const MealCard = (props) => {
 
 	return (
 		<>
-			{response.loading ? <p>Loading...</p> : null}
+			{response.loading ? <PlaceholderCard/> : null }
 			{response.error ? <p>Error: {response.error.message}</p> : null}
 			{response.data
+				// eslint-disable-next-line multiline-ternary
 				? (
 					<>
 						<Card
@@ -40,15 +42,16 @@ export const MealCard = (props) => {
 							onClick={() => handleShow()}>
 							<Card.Body>
 								<Card.Img
+									variant="top"
 									src={meal.strMealThumb ? meal.strMealThumb : 'https://via.placeholder.com/150' }
 									alt="placeholder"
 									className="mb-2 object-fit-fill"/>
 								<Card.Title className="fw-bolder">
 									{meal.strMeal}
 								</Card.Title>
-								<Card.Text className="fst-italic text-truncate">
+								{/* <Card.Text className="fst-italic text-truncate">
 									Explore Details
-								</Card.Text>
+								</Card.Text> */}
 							</Card.Body>
 						</Card>
 						<MealModal show={show} handleClose={handleClose} recipe={response.data.meals[0]}/>
