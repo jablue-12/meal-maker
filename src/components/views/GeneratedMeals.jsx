@@ -1,6 +1,6 @@
 import React from 'react';
 import { Col, Row } from 'react-bootstrap';
-import { MealCard } from '../card/MealCard';
+import { MealCard } from '../meals/MealCard';
 
 export const GeneratedMeals = (props) => {
 	const { meals } = props;

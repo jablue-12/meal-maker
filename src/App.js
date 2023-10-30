@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Container, Row } from 'react-bootstrap';
-import { IngredientForm } from './components/form/IngredientForm';
+import { IngredientForm } from './components/ingredients/IngredientForm';
 import { Header } from './components/navbar/Header';
 import { GeneratedMeals } from './components/views/GeneratedMeals';
 import './App.css';

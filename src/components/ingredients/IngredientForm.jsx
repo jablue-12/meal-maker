@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Accordion, Card, Form, Row, Col, Button } from 'react-bootstrap';
 import { get } from '../../api/api';
-import { IngredientCard } from '../card/IngredientCard';
+import { IngredientCard } from './IngredientCard';
 
 const ingredientEndpoint = 'filter.php?i=';
 
