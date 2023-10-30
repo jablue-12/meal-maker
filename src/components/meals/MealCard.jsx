@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Card } from 'react-bootstrap';
 import { get } from '../../api/api';
-import { MealModal } from '../modal/MealModal';
-import { PlaceholderCard } from './PlaceholderCard';
+import { PlaceholderCard } from '../common/PlaceholderCard';
+import { MealModal } from './MealModal';
 
 const endpoint = 'lookup.php?i=';
 

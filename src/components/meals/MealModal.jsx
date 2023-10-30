@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Modal } from 'react-bootstrap';
-import { MealDetailAccordion } from '../accordion/MealDetailAccordion';
+import { MealDetailAccordion } from './MealDetailAccordion';
 
 export const MealModal = (props) => {
 	const { show, handleClose, recipe } = props;
@@ -40,12 +40,13 @@ export const MealModal = (props) => {
 				<MealDetailAccordion instructions={recipe.strInstructions} ingredients={ingredients}/>
 			</Modal.Body>
 			<Modal.Footer>
+				{ recipe.strYoutube &&
 				<a
 					href={recipe.strYoutube}
 					target="_blank" rel="noopener noreferrer"
 					className="btn btn-secondary">
 						Youtube Tutorial
-				</a>
+				</a>}
 			</Modal.Footer>
 		</Modal>
 	);
