@@ -5,10 +5,27 @@ import { MEAL_DETAIL_ENDPOINT } from '../../constants/endpoints';
 import { CATEGORY_OPTION, INGREDIENT_OPTION } from '../../constants/options';
 import { GeneratedMeals } from '../meals/GeneratedMeals';
 import { MealForm } from '../meals/MealForm';
+import { MealPagination } from '../meals/MealPagination';
 
 export const HomePage = () => {
 	const [generatedMeals, setGeneratedMeals] = useState([]);
 	const [hasGenerateMeals, setHasGenerateMeals] = useState(false);
+
+	// Pagination state
+	const [currentPage, setCurrentPage] = useState(1);
+	const itemsPerPage = 9;
+
+	// Function to get a slice of meals for the current page
+	const getCurrentPageMeals = () => {
+		const startIndex = (currentPage - 1) * itemsPerPage;
+		const endIndex = startIndex + itemsPerPage;
+		return generatedMeals.slice(startIndex, endIndex);
+	};
+
+	// Update the current page when the user clicks on a page number
+	const handlePageChange = (newPage) => {
+		setCurrentPage(newPage);
+	};
 
 	const getDetailedMeals = (mealList) => {
 		const mealPromises = mealList.map((meal) => {
@@ -26,7 +43,10 @@ export const HomePage = () => {
 
 				setGeneratedMeals((prevMeals) => [...prevMeals, ...detailedMeals]);
 			})
-			.finally(() => setHasGenerateMeals(true));
+			.finally(() => {
+				setHasGenerateMeals(true);
+				setCurrentPage(1);
+			});
 	};
 
 	const generateMealsClick = (mealList, OPTION_TYPE) => {
@@ -37,6 +57,7 @@ export const HomePage = () => {
 			// OPTION_TYPE is NAME_OPTION which already consists the detailed meals
 			setGeneratedMeals((prevMeals) => [...prevMeals, ...mealList]);
 			setHasGenerateMeals(true);
+			setCurrentPage(1);
 		}
 	};
 
@@ -46,7 +67,16 @@ export const HomePage = () => {
 				<Row>
 					<MealForm onGenerateMealsClick={generateMealsClick} />
 				</Row>
-				{ hasGenerateMeals && <GeneratedMeals meals={generatedMeals}/>}
+				{ hasGenerateMeals && <GeneratedMeals meals={getCurrentPageMeals()}/>}
+				<Row>
+					{ hasGenerateMeals &&
+						<MealPagination
+							currentPage={currentPage}
+							itemsPerPage={itemsPerPage}
+							totalItems={generatedMeals.length}
+							onPageChange={handlePageChange}/>
+					}
+				</Row>
 			</Container>
 		</>
 	);
