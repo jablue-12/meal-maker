@@ -1,15 +1,12 @@
 import React from 'react';
 import { Col, Row } from 'react-bootstrap';
-import { MealCard } from '../meals/MealCard';
+import { MealCard } from './MealCard';
 
 export const GeneratedMeals = (props) => {
 	const { meals } = props;
 
 	return (
 		<>
-			{/* <pre style={{ whiteSpace: 'pre-wrap' }} className=" overflow-hidden">
-				{JSON.stringify(meals)}
-			</pre> */}
 			{meals.length > 0
 				? (
 					<Row xs={1} sm={2} md={2} lg={3}>
