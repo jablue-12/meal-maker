@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Accordion, Card, Form, Row, Col, Button, Dropdown, InputGroup, Spinner } from 'react-bootstrap';
-import { Plus } from 'react-bootstrap-icons';
+import { Filter } from 'react-bootstrap-icons';
 import { get } from '../../api';
 import { INGREDIENT_ENDPOINT, NAME_ENDPOINT, CATEGORY_ENDPOINT } from '../../constants/endpoints';
 import { INGREDIENT_OPTION, NAME_OPTION, CATEGORY_OPTION } from '../../constants/options';
@@ -103,7 +103,7 @@ export const MealForm = (props) => {
 										<InputGroup.Text id="basic-addon1">{selectedOption}</InputGroup.Text>
 										<Form.Control
 											type="name"
-											placeholder={`Enter your ${selectedOption}`}
+											placeholder={`Enter the ${selectedOption}`}
 											value={formValue}
 											onChange={(e) => setFormValue(e.target.value)}
 											required
@@ -116,13 +116,13 @@ export const MealForm = (props) => {
 								<Col className="flex-grow-0">
 									<Dropdown>
 										<Dropdown.Toggle variant="primary">
-											<Plus size={28}/>
+											<Filter title="Filter By" size={28}/>
 										</Dropdown.Toggle>
 
 										<Dropdown.Menu>
-											<Dropdown.Item onClick={() => setSelectedOption(options[0])}>Ingredient</Dropdown.Item>
-											<Dropdown.Item onClick={() => setSelectedOption(options[1])}>Name</Dropdown.Item>
-											<Dropdown.Item onClick={() => setSelectedOption(options[2])}>Category</Dropdown.Item>
+											<Dropdown.Item onClick={() => setSelectedOption(options[0])} active={selectedOption === INGREDIENT_OPTION}>Ingredient</Dropdown.Item>
+											<Dropdown.Item onClick={() => setSelectedOption(options[1])} active={selectedOption === NAME_OPTION}>Name</Dropdown.Item>
+											<Dropdown.Item onClick={() => setSelectedOption(options[2])} active={selectedOption === CATEGORY_OPTION}>Category</Dropdown.Item>
 										</Dropdown.Menu>
 
 									</Dropdown>
