@@ -3,6 +3,7 @@ import { Container, Row } from 'react-bootstrap';
 import { get } from '../../api';
 import { MEAL_DETAIL_ENDPOINT } from '../../constants/endpoints';
 import { CATEGORY_OPTION, INGREDIENT_OPTION } from '../../constants/options';
+import { StickyButton } from '../common/StickyButton';
 import { GeneratedMeals } from '../meals/GeneratedMeals';
 import { MealForm } from '../meals/MealForm';
 import { MealPagination } from '../meals/MealPagination';
@@ -77,6 +78,7 @@ export const HomePage = () => {
 							onPageChange={handlePageChange}/>
 					}
 				</Row>
+				<StickyButton/>
 			</Container>
 		</>
 	);
