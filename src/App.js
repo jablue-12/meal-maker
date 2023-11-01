@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import { Footer } from './components/navbar/Footer';
 import { Header } from './components/navbar/Header';
 import { AboutUsPage } from './components/views/AboutUsPage';
 import { ErrorPage } from './components/views/ErrorPage';
@@ -15,6 +16,7 @@ function App () {
 				{/* Use the catch-all route to handle errors */}
 				<Route path="/*" element={<ErrorPage />} />
 			</Routes>
+			<Footer/>
 		</Router>
 	);
 }

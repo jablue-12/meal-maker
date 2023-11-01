@@ -30,8 +30,8 @@ export const StickyButton = () => {
 
 	const buttonStyle = {
 		position: 'fixed',
-		bottom: '20px',
-		left: '20px',
+		bottom: '70px',
+		left: '15px',
 		display: isVisible ? 'block' : 'none'
 	};
 
