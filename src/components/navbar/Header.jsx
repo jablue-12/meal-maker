@@ -12,7 +12,7 @@ export const Header = () => {
 					<Navbar.Collapse id="responsive-navbar-nav" className="justify-content-end">
 						<Nav>
 							<Link to="/" className="nav-link">Home</Link>
-							<Link to="/about-us" className="nav-link">About Us</Link>
+							<Link to="/ingredients" className="nav-link">Ingredients</Link>
 							<Link to="/random-meal" className="nav-link">Random Meal</Link>
 						</Nav>
 					</Navbar.Collapse>

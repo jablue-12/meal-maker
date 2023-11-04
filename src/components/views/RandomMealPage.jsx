@@ -49,6 +49,14 @@ export const RandomMealPage = () => {
 							</Col>
 							<Col className="mb-1">
 								<MealDetailAccordion recipe={response.data.meals[0]}/>
+								{response.data.meals[0].strYoutube
+									? <a
+										href={response.data.meals[0].strYoutube}
+										target="_blank" rel="noopener noreferrer"
+										className="my-3 btn btn-secondary d-grid gap-2">
+											Youtube Tutorial
+									</a>
+									: null}
 							</Col>
 						</>
 					)
