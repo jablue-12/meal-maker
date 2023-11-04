@@ -1,15 +1,42 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Accordion, Col, Row } from 'react-bootstrap';
 
 export const MealDetailAccordion = (props) => {
-	const { instructions, ingredients } = props;
+	const { recipe } = props;
+	const [ingredients, setIngredients] = useState([]);
+
+	useEffect(() => {
+		if (recipe) {
+			const ingredientKeys = Object.keys(recipe).filter(key => key.startsWith('strIngredient'));
+			const measureKeys = Object.keys(recipe).filter(key => key.startsWith('strMeasure'));
+
+			const initIngredients = ingredientKeys.map((ingredientKey, index) => {
+				const measureKey = measureKeys[index];
+				const ingredientName = recipe[ingredientKey];
+				const ingredientMeasure = recipe[measureKey];
+
+				// Check if the ingredient name is not an empty string
+				if (ingredientName && ingredientName.trim() !== '') {
+					return {
+						ingredientName,
+						ingredientMeasure
+					};
+				}
+
+				return null;
+			});
+
+			setIngredients(initIngredients.filter(ingredient => ingredient !== null));
+		}
+	}, [recipe]);
+
 	return (
 		<Accordion defaultActiveKey={['0']} alwaysOpen>
 			<Accordion.Item eventKey="0">
 				<Accordion.Header>Instructions</Accordion.Header>
 				<Accordion.Body>
 					<pre style={{ whiteSpace: 'pre-wrap' }} className=" overflow-hidden">
-						{instructions}
+						{recipe.strInstructions}
 					</pre>
 				</Accordion.Body>
 			</Accordion.Item>

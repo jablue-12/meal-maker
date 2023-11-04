@@ -13,6 +13,7 @@ export const Header = () => {
 						<Nav>
 							<Link to="/" className="nav-link">Home</Link>
 							<Link to="/about-us" className="nav-link">About Us</Link>
+							<Link to="/random-meal" className="nav-link">Random Meal</Link>
 						</Nav>
 					</Navbar.Collapse>
 				</Container>
