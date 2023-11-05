@@ -1,9 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Accordion, Col, Row } from 'react-bootstrap';
+import { IngredientContext } from '../ingredients/IngredientProvider';
 
 export const MealDetailAccordion = (props) => {
 	const { recipe } = props;
+	const { globalIngredients } = useContext(IngredientContext);
+
 	const [ingredients, setIngredients] = useState([]);
+
+	const providedIngredient = (ingredientName) => {
+		if (globalIngredients) {
+			return globalIngredients.some((globalIngredient) => globalIngredient.toLowerCase().trim() === ingredientName.toLowerCase().trim());
+		}
+		return false;
+	};
 
 	useEffect(() => {
 		if (recipe) {
@@ -56,7 +66,7 @@ export const MealDetailAccordion = (props) => {
 								</Row>
 								{
 									ingredients.map((ingredient, index) => (
-										<Row key={`ingredient-measurement-${ingredient}-${index}`} className=" nav-underline ">
+										<Row key={`ingredient-measurement-${ingredient}-${index}`} className={providedIngredient(ingredient.ingredientName) ? 'bg-warning' : null }>
 											<Col>
 												{ingredient.ingredientName}
 											</Col>

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Container, Card, Col, Row, CloseButton } from 'react-bootstrap';
 
-// TODO: Fix IngredientCard styling with the X button being far away from the name
 export const IngredientCard = (props) => {
 	const { onButtonClick, ingredientName } = props;
 	const deleteIngredient = () => {

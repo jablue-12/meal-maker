@@ -43,6 +43,7 @@ export const DisplayMeals = (props) => {
 
 				setGeneratedMeals((prevMeals) => [...prevMeals, ...detailedMeals]);
 			})
+			.catch((error) => console.error(`${error}`))
 			.finally(() => {
 				setCurrentPage(1);
 			});

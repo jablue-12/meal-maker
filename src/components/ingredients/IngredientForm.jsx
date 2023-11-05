@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Accordion, Card, Form, Row, Col, Button, Spinner } from 'react-bootstrap';
 import { Plus } from 'react-bootstrap-icons';
 import { get } from '../../api';
 import { INGREDIENT_ENDPOINT } from '../../constants/endpoints';
 import { INGREDIENT_OPTION } from '../../constants/options';
 import { IngredientCard } from './IngredientCard';
+import { IngredientContext } from './IngredientProvider';
 
-// TODO: Highlight the ingredients in the Accordion
 export const IngredientForm = (props) => {
 	const { onGenerateMealsClick } = props;
+	const { setGlobalIngredients } = useContext(IngredientContext);
 
 	const [formValue, setFormValue] = useState('');
 	const [validationError, setValidationError] = useState(null);
@@ -25,7 +26,7 @@ export const IngredientForm = (props) => {
 		}
 	};
 
-	const addIngredient = async (newIngredient) => {
+	const addIngredient = (newIngredient) => {
 		if (newIngredient.trim() === '') {
 			return;
 		}
@@ -53,6 +54,21 @@ export const IngredientForm = (props) => {
 		return /^\s*$/.test(formValue);
 	};
 
+	const removeDuplicateMeals = (meals) => {
+		const uniqueIds = new Set();
+
+		// Filter out duplicates based on the 'idMeal' property
+		const filteredMeals = meals.filter((meal) => {
+			if (!uniqueIds.has(meal.idMeal)) {
+				uniqueIds.add(meal.idMeal);
+				return true;
+			}
+			return false;
+		});
+
+		return filteredMeals;
+	};
+
 	const generateMeals = () => {
 		setIsLoading(true);
 		const mealPromises = ingredientList.map((ingredient) => {
@@ -67,10 +83,13 @@ export const IngredientForm = (props) => {
 					.map((apiResponse) => apiResponse.data.meals)
 					.flat();
 
-				// Pass data to parent
-				onGenerateMealsClick(meals, INGREDIENT_OPTION);
+				// Pass unqiue data to parent
+				const uniqueMeals = removeDuplicateMeals(meals);
+				onGenerateMealsClick(uniqueMeals, INGREDIENT_OPTION);
 			})
+			.catch((error) => console.error(`IngredientForm: ${error}`))
 			.finally(() => {
+				setGlobalIngredients(ingredientList);
 				setIsLoading(false);
 				setActiveKey(null);
 				setIngredientList([]);

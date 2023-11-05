@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Button, Col, Container, Row, Spinner } from 'react-bootstrap';
 import { get } from '../../api';
 import { RANDOM_MEAL_ENDPOINT } from '../../constants/endpoints';
+import { IngredientContext } from '../ingredients/IngredientProvider';
 import { MealCard } from '../meals/MealCard';
 import { MealDetailAccordion } from '../meals/MealDetailAccordion';
 
 export const RandomMealPage = () => {
+	const { setGlobalIngredients } = useContext(IngredientContext);
+
 	const [response, setResponse] = useState({
 		data: null,
 		loading: true,
@@ -20,6 +23,8 @@ export const RandomMealPage = () => {
 
 	useEffect(() => {
 		fetchRandomMeal();
+		// Reset global ingredients since we don't want to highlight the ingredients from this page
+		setGlobalIngredients([]);
 	}, []);
 
 	return (
