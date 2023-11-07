@@ -13,27 +13,30 @@ export const MealPagination = (props) => {
 	return (
 		totalItems > itemsPerPage && (
 			<Pagination className="justify-content-end">
+				{currentPage > 1 &&
 				<Pagination.First
-					onClick={() => handleClick(1)}
-					disabled={currentPage === 1}
-				/>
+					onClick={() => handleClick(1)}/>
+				}
+
+				{currentPage > 1 &&
 				<Pagination.Prev
-					onClick={() => handleClick(currentPage - 1)}
-					disabled={currentPage === 1}
-				>
+					onClick={() => handleClick(currentPage - 1)}>
 					{currentPage - 1}
 				</Pagination.Prev>
-				<Pagination.Item disabled>{currentPage}</Pagination.Item>
+				}
+
+				<Pagination.Item active>{currentPage}</Pagination.Item>
+
+				{currentPage < numPages &&
 				<Pagination.Next
-					onClick={() => handleClick(currentPage + 1)}
-					disabled={currentPage === numPages}
-				>
+					onClick={() => handleClick(currentPage + 1)}>
 					{currentPage + 1}
 				</Pagination.Next>
-				<Pagination.Last
-					onClick={() => handleClick(numPages)}
-					disabled={currentPage === numPages}
-				/>
+				}
+
+				{currentPage < numPages &&
+				<Pagination.Last onClick={() => handleClick(numPages)}/>
+				}
 			</Pagination>
 		)
 	);

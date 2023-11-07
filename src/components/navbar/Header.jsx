@@ -7,7 +7,7 @@ export const Header = () => {
 		<header>
 			<Navbar collapseOnSelect expand="md" bg="dark" data-bs-theme="dark" className="mb-3">
 				<Container fluid>
-					<Link to="/" className="navbar-brand">Meal Maker</Link>
+					<a href="https://www.youtube.com/watch?v=xvFZjo5PgG0" target="_blank" rel="noopener noreferrer" className="navbar-brand">Meal Maker</a>
 					<Navbar.Toggle aria-controls="responsive-navbar-nav" />
 					<Navbar.Collapse id="responsive-navbar-nav" className="justify-content-end">
 						<Nav>
