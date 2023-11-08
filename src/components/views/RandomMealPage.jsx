@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Button, Col, Container, Row, Spinner } from 'react-bootstrap';
 import { get } from '../../api';
 import { RANDOM_MEAL_ENDPOINT } from '../../constants/endpoints';
+import { YoutubeButton } from '../common/YoutubeButton';
 import { IngredientContext } from '../ingredients/IngredientProvider';
 import { MealCard } from '../meals/MealCard';
 import { MealDetailAccordion } from '../meals/MealDetailAccordion';
@@ -55,12 +56,7 @@ export const RandomMealPage = () => {
 							<Col className="mb-1">
 								<MealDetailAccordion recipe={response.data.meals[0]}/>
 								{response.data.meals[0].strYoutube
-									? <a
-										href={response.data.meals[0].strYoutube}
-										target="_blank" rel="noopener noreferrer"
-										className="my-3 btn btn-secondary d-grid gap-2">
-											Youtube Tutorial
-									</a>
+									? <YoutubeButton className="my-3 d-grid gap-2" link={response.data.meals[0].strYoutube}/>
 									: null}
 							</Col>
 						</>
