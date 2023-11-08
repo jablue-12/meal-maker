@@ -1,5 +1,6 @@
 import React from 'react';
 import { Modal } from 'react-bootstrap';
+import { YoutubeButton } from '../common/YoutubeButton';
 import { MealDetailAccordion } from './MealDetailAccordion';
 
 export const MealModal = (props) => {
@@ -15,12 +16,8 @@ export const MealModal = (props) => {
 			</Modal.Body>
 			<Modal.Footer>
 				{ recipe.strYoutube &&
-				<a
-					href={recipe.strYoutube}
-					target="_blank" rel="noopener noreferrer"
-					className="btn btn-secondary">
-						Youtube Tutorial
-				</a>}
+				<YoutubeButton link={recipe.strYoutube}/>
+				}
 			</Modal.Footer>
 		</Modal>
 	);
