@@ -37,6 +37,24 @@ export const MealForm = (props) => {
 		return /^\s*$/.test(formValue);
 	};
 
+	const retrievePlaceholder = () => {
+		let placeholder;
+		switch (selectedOption) {
+		case INGREDIENT_OPTION:
+			placeholder = 'e.g. basil';
+			break;
+		case NAME_OPTION:
+			placeholder = 'e.g. spaghetti';
+			break;
+		case CATEGORY_OPTION:
+			placeholder = 'e.g. beef';
+			break;
+		default: // Ingredient by default
+			placeholder = 'e.g. basil';
+		}
+		return placeholder;
+	};
+
 	const generateMeals = () => {
 		// Send to parent component
 		setIsGenerateMealBtnClicked(true);
@@ -61,12 +79,12 @@ export const MealForm = (props) => {
 			setResponse(apiResponse);
 
 			if (apiResponse.error) {
-				onGenerateMealsClick([], selectedOption);
+				onGenerateMealsClick([], selectedOption, null);
 			} else {
 				if (apiResponse.data) {
-					onGenerateMealsClick(apiResponse.data.meals ? apiResponse.data.meals : [], selectedOption);
+					onGenerateMealsClick(apiResponse.data.meals ? apiResponse.data.meals : [], selectedOption, formValue);
 				} else {
-					onGenerateMealsClick([], selectedOption);
+					onGenerateMealsClick([], selectedOption, formValue);
 				}
 			}
 		}).finally(() => {
@@ -103,7 +121,7 @@ export const MealForm = (props) => {
 										<InputGroup.Text id="basic-addon1">{selectedOption}</InputGroup.Text>
 										<Form.Control
 											type="name"
-											placeholder={`Enter the ${selectedOption}`}
+											placeholder={retrievePlaceholder()}
 											value={formValue}
 											onChange={(e) => setFormValue(e.target.value)}
 											required
@@ -122,7 +140,7 @@ export const MealForm = (props) => {
 										<Dropdown.Menu>
 											<Dropdown.Item onClick={() => setSelectedOption(options[0])} active={selectedOption === INGREDIENT_OPTION}>Ingredient</Dropdown.Item>
 											<Dropdown.Item onClick={() => setSelectedOption(options[1])} active={selectedOption === NAME_OPTION}>Name</Dropdown.Item>
-											<Dropdown.Item onClick={() => setSelectedOption(options[2])} active={selectedOption === CATEGORY_OPTION}>Category</Dropdown.Item>
+											<Dropdown.Item onClick={() => setSelectedOption(options[2])} active={selectedOption === CATEGORY_OPTION}>Food Category</Dropdown.Item>
 										</Dropdown.Menu>
 
 									</Dropdown>

@@ -41,16 +41,8 @@ export const MealDetailAccordion = (props) => {
 	}, [recipe]);
 
 	return (
-		<Accordion defaultActiveKey={['0']} alwaysOpen>
+		<Accordion defaultActiveKey={['0', '1']} alwaysOpen>
 			<Accordion.Item eventKey="0">
-				<Accordion.Header>Instructions</Accordion.Header>
-				<Accordion.Body>
-					<pre style={{ whiteSpace: 'pre-wrap' }} className=" overflow-hidden">
-						{recipe.strInstructions}
-					</pre>
-				</Accordion.Body>
-			</Accordion.Item>
-			<Accordion.Item eventKey="1">
 				<Accordion.Header>Ingredients</Accordion.Header>
 				<Accordion.Body>
 					{ ingredients.length > 0
@@ -80,6 +72,14 @@ export const MealDetailAccordion = (props) => {
 						)
 						: null
 					}
+				</Accordion.Body>
+			</Accordion.Item>
+			<Accordion.Item eventKey="1">
+				<Accordion.Header>Instructions</Accordion.Header>
+				<Accordion.Body>
+					<pre style={{ whiteSpace: 'pre-wrap' }} className="overflow-hidden">
+						{recipe.strInstructions}
+					</pre>
 				</Accordion.Body>
 			</Accordion.Item>
 		</Accordion>
