@@ -2,6 +2,8 @@
 
 Turn your ingredients into meals with Meal Maker! Just tell it what you have, and it serves up delicious recipes.
 
+Deployed using Netlify. Try it out [here!](https://meal-maker-jc.netlify.app/)
+
 ## Available Scripts
 
 ### `npm install`
