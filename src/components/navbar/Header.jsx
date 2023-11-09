@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Navbar, Nav, Container, NavbarBrand } from 'react-bootstrap';
+import { Navbar, Nav, Container, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { TutorialCanvas } from '../common/TutorialCanvas';
 
@@ -18,7 +18,7 @@ export const Header = () => {
 		<header>
 			<Navbar expanded={expanded} expand="md" bg="dark" data-bs-theme="dark" className="mb-3">
 				<Container fluid>
-					<NavbarBrand onClick={handleShow} style={{ cursor: 'pointer' }}>Meal Maker</NavbarBrand>
+					<Button className="navbar-brand p-0 m-0" variant="link-dark" onClick={handleShow} style={{ cursor: 'pointer' }}>Meal Maker</Button>
 					<Navbar.Toggle aria-controls="responsive-navbar-nav" onClick={toggleNavbar}/>
 					<Navbar.Collapse id="responsive-navbar-nav" className="justify-content-end">
 						<Nav>

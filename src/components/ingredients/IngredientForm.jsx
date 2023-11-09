@@ -43,7 +43,6 @@ export const IngredientForm = (props) => {
 	};
 
 	const deleteIngredient = (ingredientName) => {
-		console.log(`Deleting ingredient "${ingredientName}" from the list`);
 		const updatedIngredientList = ingredientList.filter(
 			(item) => item !== ingredientName
 		);
@@ -122,7 +121,7 @@ export const IngredientForm = (props) => {
 								<Form.Group as={Col}>
 									<Form.Control
 										type="name"
-										placeholder="Enter your ingredient"
+										placeholder="e.g. beef, avocado, etc."
 										value={formValue}
 										onChange={(e) => setFormValue(e.target.value)}
 										required
